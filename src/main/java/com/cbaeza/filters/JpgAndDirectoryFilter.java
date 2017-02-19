@@ -19,9 +19,6 @@ public class JpgAndDirectoryFilter implements DirectoryStream.Filter<Path> {
             return true;
         }
         String extension = FilenameUtils.getExtension(entry.getFileName().toString());
-        if (extension != null) {
-            return (extension.equalsIgnoreCase("jpg"));
-        }
-        return false;
+        return (extension.equalsIgnoreCase("jpg"));
     }
 }
