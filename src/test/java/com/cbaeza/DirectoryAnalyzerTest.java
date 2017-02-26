@@ -2,6 +2,10 @@ package com.cbaeza;
 
 import com.cbaeza.filters.JpgAndDirectoryFilter;
 import com.cbaeza.metadata.MetadataReader;
+import com.drew.imaging.ImageMetadataReader;
+import com.drew.metadata.Directory;
+import com.drew.metadata.Metadata;
+import com.drew.metadata.Tag;
 import org.junit.Test;
 
 import java.nio.file.FileSystems;
@@ -24,11 +28,34 @@ public class DirectoryAnalyzerTest {
         System.out.println("************************");
         System.out.println(files.size() + " Files found.");
 
-        for(Path entry: directoryAnalyzer.getFiles()){
+        /*for(Path entry: directoryAnalyzer.getFiles()){
             if(!Files.isDirectory(entry)){
                 MetadataReader metadataReader = new MetadataReader(entry);
             }
             System.out.println("###############################################");
+        }*/
+        for(Path entry: directoryAnalyzer.getFiles()){
+
+            if(Files.isDirectory(entry)){
+                continue;
+            }
+            System.out.println("###########################");
+            System.out.println(entry.getFileName());
+            System.out.println("###########################");
+            Metadata metadata = ImageMetadataReader.readMetadata(entry.toFile());
+            for (Directory directory : metadata.getDirectories()) {
+                for (Tag tag : directory.getTags()) {
+                    System.out.format("[%s] - %s = %s",
+                            directory.getName(), tag.getTagName(), tag.getDescription());
+                    System.out.println();
+                }
+                if (directory.hasErrors()) {
+                    for (String error : directory.getErrors()) {
+                        System.err.format("ERROR: %s", error);
+                    }
+                }
+            }// for
+
         }
     }
 
