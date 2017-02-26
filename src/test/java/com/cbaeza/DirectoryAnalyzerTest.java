@@ -1,9 +1,11 @@
 package com.cbaeza;
 
 import com.cbaeza.filters.JpgAndDirectoryFilter;
+import com.cbaeza.metadata.MetadataReader;
 import org.junit.Test;
 
 import java.nio.file.FileSystems;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
@@ -21,6 +23,13 @@ public class DirectoryAnalyzerTest {
         List files = directoryAnalyzer.getFiles();
         System.out.println("************************");
         System.out.println(files.size() + " Files found.");
+
+        for(Path entry: directoryAnalyzer.getFiles()){
+            if(!Files.isDirectory(entry)){
+                MetadataReader metadataReader = new MetadataReader(entry);
+            }
+            System.out.println("###############################################");
+        }
     }
 
 }

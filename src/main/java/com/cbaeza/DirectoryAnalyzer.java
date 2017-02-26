@@ -14,7 +14,7 @@ public class DirectoryAnalyzer {
 
     private final Path directoryPath;
     private final DirectoryStream.Filter filter;
-    private List files = new ArrayList();
+    private List<Path> files = new ArrayList();
 
     public DirectoryAnalyzer(Path directoryPath, DirectoryStream.Filter filter) {
         this.directoryPath = directoryPath;
@@ -32,7 +32,7 @@ public class DirectoryAnalyzer {
         analyze(directoryPath);
     }
 
-    private List analyze(Path path) {
+    private List<Path> analyze(Path path) {
         try (DirectoryStream<Path> stream = Files.newDirectoryStream(path, filter)) {
             for( Path entry: stream){
                 System.out.println(entry.getFileName());
@@ -51,7 +51,7 @@ public class DirectoryAnalyzer {
         return directoryPath;
     }
 
-    public List getFiles() {
+    public List<Path>  getFiles() {
         return files;
     }
 }
