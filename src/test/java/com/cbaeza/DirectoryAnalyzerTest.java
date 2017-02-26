@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 public class DirectoryAnalyzerTest {
     @Test
     public void analyze() throws Exception {
-        Path path = FileSystems.getDefault().getPath(System.getProperty("user.home") + "/Pictures");
+        Path path = FileSystems.getDefault().getPath(ClassLoader.getSystemResource("pictures").getPath());
         DirectoryAnalyzer directoryAnalyzer = new DirectoryAnalyzer(path, new JpgAndDirectoryFilter());
         assertNotNull(directoryAnalyzer);
         List files = directoryAnalyzer.getFiles();
