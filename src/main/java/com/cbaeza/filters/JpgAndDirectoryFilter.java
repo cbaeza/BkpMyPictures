@@ -12,6 +12,9 @@ import java.nio.file.attribute.BasicFileAttributes;
  * Filter for jpg format
  */
 public class JpgAndDirectoryFilter implements DirectoryStream.Filter<Path> {
+
+    public static final String JPG = "jpg";
+
     @Override
     public boolean accept(Path entry) throws IOException {
         BasicFileAttributes basicFileAttributes = Files.readAttributes(entry, BasicFileAttributes.class);
@@ -19,6 +22,6 @@ public class JpgAndDirectoryFilter implements DirectoryStream.Filter<Path> {
             return true;
         }
         String extension = FilenameUtils.getExtension(entry.getFileName().toString());
-        return (extension.equalsIgnoreCase("jpg"));
+        return (extension.equalsIgnoreCase(JPG));
     }
 }
