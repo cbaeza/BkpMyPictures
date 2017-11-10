@@ -7,51 +7,38 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.nio.file.DirectoryStream;
 import java.nio.file.FileSystems;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
-import static org.junit.Assert.*;
-
+import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = App.class)
 @DirtiesContext
 public class DirectoryAnalyzerTest {
+
     @Test
-    public void analyze() throws Exception {
-        //Path path = FileSystems.getDefault().getPath(ClassLoader.getSystemResource("pictures").getPath());
+    public void analyzeAndCopy() throws Exception {
         Path path = FileSystems.getDefault().getPath(System.getProperty("user.home") + "/Pictures");
         DirectoryAnalyzer directoryAnalyzer = new DirectoryAnalyzer(path, new JpgAndDirectoryFilter(), false);
         assertNotNull(directoryAnalyzer);
-        List files = directoryAnalyzer.getRelevantFiles();
+        List<Path> files = directoryAnalyzer.getRelevantFiles();
 
-        for(Path entry: directoryAnalyzer.getRelevantFiles()){
-            System.out.println(entry);
-        }
-
-//        for(Path entry: directoryAnalyzer.getRelevantFiles()){
-//
-//            if(Files.isDirectory(entry)){
-//                continue;
-//            }
-//            System.out.println("###########################");
-//            System.out.println(entry.getFileName());
-//            System.out.println("###########################");
-//            Metadata metadata = ImageMetadataReader.readMetadata(entry.toFile());
-//            for (Directory directory : metadata.getDirectories()) {
-//                for (Tag tag : directory.getTags()) {
-//                    System.out.format("[%s] - %s = %s",
-//                            directory.getName(), tag.getTagName(), tag.getDescription());
-//                    System.out.println();
-//                }
-//                if (directory.hasErrors()) {
-//                    for (String error : directory.getErrors()) {
-//                        System.err.format("ERROR: %s", error);
-//                    }
-//                }
-//            }// for
-//        }
+        /*
+        // copy all relevant files
+        int i = 0;
+        for (Path source : files) {
+            System.out.println(source);
+            Files.copy(source,
+                    FileSystems.getDefault().getPath(System.getProperty("user.home") + "/ALL_PICTURES/" + "IMG_" + i + ".jpg"),
+                    StandardCopyOption.COPY_ATTRIBUTES, StandardCopyOption.REPLACE_EXISTING);
+            i++;
+        } // for
+        */
         System.out.println("************************");
         System.out.println(files.size() + " Files found.");
         System.out.println(directoryAnalyzer.getAcumulateFileSizeInBytes() + " Bytes");
