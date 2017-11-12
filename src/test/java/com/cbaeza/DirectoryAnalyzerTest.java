@@ -1,6 +1,7 @@
 package com.cbaeza;
 
 import com.cbaeza.filters.JpgAndDirectoryFilter;
+import com.cbaeza.filters.MovFilter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.annotation.DirtiesContext;
@@ -28,17 +29,17 @@ public class DirectoryAnalyzerTest {
         assertNotNull(directoryAnalyzer);
         List<Path> files = directoryAnalyzer.getRelevantFiles();
 
-        /*
+
         // copy all relevant files
         int i = 0;
         for (Path source : files) {
             System.out.println(source);
             Files.copy(source,
-                    FileSystems.getDefault().getPath(System.getProperty("user.home") + "/ALL_PICTURES/" + "IMG_" + i + ".jpg"),
+                    FileSystems.getDefault().getPath("/Volumes/Data-Timecapsule/ALL_PICTURES/" + "IMG_" + i + ".jpg"),
                     StandardCopyOption.COPY_ATTRIBUTES, StandardCopyOption.REPLACE_EXISTING);
             i++;
         } // for
-        */
+
         System.out.println("************************");
         System.out.println(files.size() + " Files found.");
         System.out.println(directoryAnalyzer.getAcumulateFileSizeInBytes() + " Bytes");
