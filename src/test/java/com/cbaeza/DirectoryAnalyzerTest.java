@@ -28,11 +28,20 @@ public class DirectoryAnalyzerTest {
 
   @Test
   public void analyzeAndCopy() throws IOException {
-    Path path = FileSystems.getDefault().getPath(System.getProperty("user.home") + "/Pictures");
+    Path path = FileSystems.getDefault().getPath(System.getProperty("user.home") + "/Pictures/test");
     DirectoryAnalyzer directoryAnalyzer = new DirectoryAnalyzer(path, new JpgAndDirectoryFilter(), false);
     assertNotNull(directoryAnalyzer);
     List<Path> files = directoryAnalyzer.getRelevantFiles();
+   // displayAndCopy(files);
 
+    LOG.info("************************");
+    LOG.info(files.size() + " Files found.");
+    LOG.info(directoryAnalyzer.getAcumulateFileSizeInBytes() + " Bytes");
+    LOG.info(directoryAnalyzer.getAcumulateFileSizeInMegaBytes() + " MB");
+    LOG.info(directoryAnalyzer.getAcumulateFileSizeInGigaBytes() + " GB");
+  }
+
+  private void displayAndCopy(List<Path> files) {
     // copy all relevant files
     int i = 0;
     for (Path source : files) {
@@ -43,12 +52,6 @@ public class DirectoryAnalyzerTest {
           StandardCopyOption.COPY_ATTRIBUTES, StandardCopyOption.REPLACE_EXISTING);*/
       i++;
     } // for
-
-    LOG.info("************************");
-    LOG.info(files.size() + " Files found.");
-    LOG.info(directoryAnalyzer.getAcumulateFileSizeInBytes() + " Bytes");
-    LOG.info(directoryAnalyzer.getAcumulateFileSizeInMegaBytes() + " MB");
-    LOG.info(directoryAnalyzer.getAcumulateFileSizeInGigaBytes() + " GB");
   }
 
 }

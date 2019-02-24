@@ -13,7 +13,8 @@ import org.apache.commons.io.FilenameUtils;
  */
 public class JpgAndDirectoryFilter implements DirectoryStream.Filter<Path> {
 
-  public static final String JPG = "jpg";
+  private static final String JPG = "jpg";
+  private static final String JPEG = "jpeg";
 
   @Override
   public boolean accept(Path entry) throws IOException {
@@ -22,6 +23,6 @@ public class JpgAndDirectoryFilter implements DirectoryStream.Filter<Path> {
       return true;
     }
     String extension = FilenameUtils.getExtension(entry.getFileName().toString());
-    return (extension.equalsIgnoreCase(JPG));
+    return (extension.equalsIgnoreCase(JPG) || extension.equalsIgnoreCase(JPEG));
   }
 }
