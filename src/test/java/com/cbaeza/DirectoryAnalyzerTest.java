@@ -4,9 +4,7 @@ import static org.junit.Assert.assertNotNull;
 
 import java.io.IOException;
 import java.nio.file.FileSystems;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 import org.junit.Test;
@@ -36,9 +34,9 @@ public class DirectoryAnalyzerTest {
 
     LOG.info("************************");
     LOG.info(files.size() + " Files found.");
-    LOG.info(directoryAnalyzer.getAcumulateFileSizeInBytes() + " Bytes");
-    LOG.info(directoryAnalyzer.getAcumulateFileSizeInMegaBytes() + " MB");
-    LOG.info(directoryAnalyzer.getAcumulateFileSizeInGigaBytes() + " GB");
+    LOG.info(directoryAnalyzer.getTotalFileSize() + " Bytes");
+    LOG.info(directoryAnalyzer.getTotalFileSizeInMegaBytes() + " MB");
+    LOG.info(directoryAnalyzer.getTotalFileSizeInGigaBytes() + " GB");
   }
 
   private void displayAndCopy(List<Path> files) {
