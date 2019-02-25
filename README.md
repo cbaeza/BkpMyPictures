@@ -9,13 +9,14 @@ Utility tool to perform picture backups without override anytime
 
         usage: BkpMyPictures
          -f,--from <arg>     Path origin where are locate the pictures
-         -h,--height <arg>   Expected height of th picture. Default are 2000
+         -h,--height <arg>   Expected height of the picture. Default value is 2000
                              pixels
-         -t,--type <arg>     Type of picture to find. Default is JPG
+         -t,--type <arg>     Type of picture to find. Default value is JPG
          -to,--to <arg>      Path which you want to copy the pictures
-         -w,--width <arg>    Expected width of th picture. Default are 2000 pixels
+         -w,--width <arg>    Expected width of the picture. Default value is 2000
+                             pixels
          
-         Example: copy all file located under you home Picture dir to the target dir BKP
+         Example: copy all file located under you home Picture/test dir to the target dir BKP
          
         $ java -jar target/BkpMyPictures-1.0-SNAPSHOT-jar-with-dependencies.jar -f Pictures/test -to BKP -t JPG
 

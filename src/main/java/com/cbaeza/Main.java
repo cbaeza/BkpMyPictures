@@ -62,15 +62,16 @@ public class Main {
     to.setRequired(true);
     options.addOption(to);
 
-    Option type = new Option("t", "type", true, "Type of picture to find. Default is JPG");
+    Option type = new Option("t", "type", true, "Type of picture to find. Default value is JPG");
     type.setRequired(false);
     options.addOption(type);
 
-    Option width = new Option("w", "width", true, "Expected width of th picture. Default are 2000 pixels");
+    Option width = new Option("w", "width", true, "Expected width of the picture. Default value is 2000 pixels");
     width.setRequired(false);
     options.addOption(width);
 
-    Option height = new Option("h", "height", true, "Expected height of th picture. Default are 2000 pixels");
+    Option height = new Option("h", "height", true,
+        "Expected height of the picture. Default value is 2000 pixels");
     height.setRequired(false);
     options.addOption(height);
 
