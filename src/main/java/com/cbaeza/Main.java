@@ -66,12 +66,12 @@ public class Main {
     type.setRequired(false);
     options.addOption(type);
 
-    Option width = new Option("w", "width", true, "Expected width of the picture. Default value is 2000 pixels");
+    Option width = new Option("w", "width", true, "Expected minimum width of the picture. Default value is 2000 pixels");
     width.setRequired(false);
     options.addOption(width);
 
     Option height = new Option("h", "height", true,
-        "Expected height of the picture. Default value is 2000 pixels");
+        "Expected minimum height of the picture. Default value is 2000 pixels");
     height.setRequired(false);
     options.addOption(height);
 
