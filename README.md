@@ -7,7 +7,7 @@ Utility tool to perform picture backups without override anytime
     
 # Usage
 
-        usage: utility-name
+        usage: BkpMyPictures
          -f,--from <arg>     Path origin where are locate the pictures
          -h,--height <arg>   Expected height of th picture. Default are 2000
                              pixels
