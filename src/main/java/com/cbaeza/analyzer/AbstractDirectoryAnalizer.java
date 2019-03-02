@@ -3,7 +3,10 @@ package com.cbaeza.analyzer;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +53,29 @@ public abstract class AbstractDirectoryAnalizer {
     } catch (ImageProcessingException | IOException e) {
       LOG.error("Error {}", e);
     }
+  }
+
+  public void copyFiles(String to) {
+    // copy all relevant files
+    LOG.info("************************");
+    LOG.info("COPYING FILES TO: " + to);
+    int i = 0;
+    for (Path source : files) {
+      System.out.println(source.toString());
+
+      try {
+        Files.copy(
+            source,
+            FileSystems.getDefault().getPath(to + "/" + "IMG_" + i + ".JPG"),
+            StandardCopyOption.COPY_ATTRIBUTES,
+            StandardCopyOption.REPLACE_EXISTING);
+      } catch (IOException e) {
+        LOG.error("Error copying file {}", e);
+      }
+      i++;
+    } // for
+    LOG.info("END");
+    LOG.info("************************");
   }
 
   public void printSummary() {

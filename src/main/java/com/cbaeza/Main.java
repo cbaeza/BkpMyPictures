@@ -27,6 +27,7 @@ public class Main {
       String from = cmd.getOptionValue("from");
       String to = cmd.getOptionValue("to");
       String strategy = cmd.getOptionValue("s");
+      String copy = cmd.getOptionValue("c");
 
       // RESOLUTION
       if (from != null && to != null && "RESOLUTION".equalsIgnoreCase(strategy)) {
@@ -34,7 +35,7 @@ public class Main {
         String width = cmd.getOptionValue("width");
         String height = cmd.getOptionValue("height");
         if ("JPG".equalsIgnoreCase(pictureType) || "JPEG".equalsIgnoreCase(pictureType)) {
-          handleJpeg(from, to, width, height);
+          handleJpeg(from, to, width, height, copy);
         } else {
           System.out.println("Type: " + pictureType + " not supported");
         }
@@ -46,7 +47,7 @@ public class Main {
         try {
           long size = Long.valueOf(cmd.getOptionValue("size"));
           if ("JPG".equalsIgnoreCase(pictureType) || "JPEG".equalsIgnoreCase(pictureType)) {
-            handleJpegWithSize(from, to, size);
+            handleJpegWithSize(from, to, size, copy);
           } else {
             System.out.println("Type: " + pictureType + " not supported");
           }
@@ -62,7 +63,7 @@ public class Main {
     }
   }
 
-  private static void handleJpegWithSize(String from, String to, long size) {
+  private static void handleJpegWithSize(String from, String to, long size, String copy) {
     System.out.println(" from: " + from);
     System.out.println(" to: " + to);
     System.out.println(" size: " + size);
@@ -70,17 +71,20 @@ public class Main {
     DirectorySizeAnalyzer directorySizeAnalyzer = new DirectorySizeAnalyzer(path,
         new JpgAndDirectoryFilter(), false, size);
     directorySizeAnalyzer.printSummary();
-  }
-
-  private static void handleJpeg(String from, String to, String width, String height) throws IOException {
-    if (width != null && height != null) {
-      copyJpegFiles(from, to, Integer.valueOf(width), Integer.valueOf(height));
-    } else {
-      copyJpegFiles(from, to, 2000, 2000);
+    if ("TRUE".equalsIgnoreCase(copy)) {
+      directorySizeAnalyzer.copyFiles(System.getProperty("user.home") + "/" + to);
     }
   }
 
-  private static void copyJpegFiles(String from, String to, int width, int height) {
+  private static void handleJpeg(String from, String to, String width, String height, String copy) {
+    if (width != null && height != null) {
+      copyJpegFiles(from, to, Integer.valueOf(width), Integer.valueOf(height), copy);
+    } else {
+      copyJpegFiles(from, to, 2000, 2000, copy);
+    }
+  }
+
+  private static void copyJpegFiles(String from, String to, int width, int height, String copy) {
     System.out.println(" from: " + from);
     System.out.println(" to: " + to);
     System.out.println(" width: " + width);
@@ -90,6 +94,9 @@ public class Main {
         new JpgAndDirectoryFilter(), width, height,
         false);
     directoryResolutionAnalyzer.printSummary();
+    if ("TRUE".equalsIgnoreCase(copy)) {
+      directoryResolutionAnalyzer.copyFiles(System.getProperty("user.home") + "/" + to);
+    }
   }
 
   private static Options createOptions() {
@@ -99,7 +106,7 @@ public class Main {
     from.setRequired(true);
     options.addOption(from);
 
-    Option to = new Option("to", "to", true, "Path which you want to copy the pictures");
+    Option to = new Option("to", "to", true, "Relative path (home user) which you want to copy the pictures");
     to.setRequired(true);
     options.addOption(to);
 
@@ -126,6 +133,11 @@ public class Main {
         "Minimal size of the picture to retrieve in bytes");
     size.setRequired(false);
     options.addOption(size);
+
+    Option copy = new Option("c", "copy", true,
+        "Confirm copy files. Set TRUE");
+    copy.setRequired(false);
+    options.addOption(copy);
 
     return options;
   }
