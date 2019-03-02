@@ -27,10 +27,10 @@ Utility tool to find out and extract pictures into directories and copy this pic
   
   copy all file located under you home Picture/test dir to the target dir BKP
          
-        $ java -jar target/BkpMyPictures-1.0-SNAPSHOT-jar-with-dependencies.jar -f Pictures/test -to BKP -t JPG
+        $ java -jar target/BkpMyPictures-1.0-SNAPSHOT-jar-with-dependencies.jar -f Pictures/test -to BKP -t JPG -c TRUE
         
   copy all file located under you home Picture/test dir to the target dir BKP with size at least 1 MB
         
-        $ java -jar target/BkpMyPictures-1.0-SNAPSHOT-jar-with-dependencies.jar -f Pictures/test -to BKP -s SIZE -size 1000000 -pT JPG
+        $ java -jar target/BkpMyPictures-1.0-SNAPSHOT-jar-with-dependencies.jar -f Pictures/test -to BKP -s SIZE -size 1000000 -pT JPG -c TRUE
 
 
