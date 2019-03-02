@@ -1,5 +1,5 @@
 # BkpMyPictures (Work in progress)
-Utility tool to perform picture backups without override anytime
+Utility tool to find out and extract pictures into directories and copy this pictures to another directory. Useful for example to extract all you pictures from Apple Photo Library directory discarding automatic thumb images produced by this software.
 
 # Build
 
