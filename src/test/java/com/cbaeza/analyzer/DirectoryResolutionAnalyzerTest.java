@@ -14,7 +14,7 @@ public class DirectoryResolutionAnalyzerTest {
 
   @Test
   public void analyze() {
-    Path path = FileSystems.getDefault().getPath(System.getProperty("user.home") + "/Pictures/test");
+    Path path = FileSystems.getDefault().getPath("/Users/cbaeza/Pictures/test");
     DirectoryResolutionAnalyzer directoryResolutionAnalyzer = new DirectoryResolutionAnalyzer(path,
         new JpgAndDirectoryFilter(), false);
     assertNotNull(directoryResolutionAnalyzer);

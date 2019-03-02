@@ -14,7 +14,7 @@ public class DirectorySizeAnalyzerTest {
 
   @Test
   public void analyze() {
-    Path path = FileSystems.getDefault().getPath(System.getProperty("user.home") + "/Pictures");
+    Path path = FileSystems.getDefault().getPath("/Users/cbaeza/Pictures");
     DirectorySizeAnalyzer directorySizeAnalyzer = new DirectorySizeAnalyzer(path, new JpgAndDirectoryFilter(), false);
     assertNotNull(directorySizeAnalyzer);
     List<Path> files = directorySizeAnalyzer.getRelevantFiles();

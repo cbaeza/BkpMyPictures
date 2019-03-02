@@ -67,12 +67,12 @@ public class Main {
     System.out.println(" from: " + from);
     System.out.println(" to: " + to);
     System.out.println(" size: " + size);
-    Path path = FileSystems.getDefault().getPath(System.getProperty("user.home") + "/" + from);
+    Path path = FileSystems.getDefault().getPath(from);
     DirectorySizeAnalyzer directorySizeAnalyzer = new DirectorySizeAnalyzer(path,
         new JpgAndDirectoryFilter(), false, size);
     directorySizeAnalyzer.printSummary();
     if ("TRUE".equalsIgnoreCase(copy)) {
-      directorySizeAnalyzer.copyFiles(System.getProperty("user.home") + "/" + to);
+      directorySizeAnalyzer.copyFiles(to);
     }
   }
 
@@ -89,24 +89,24 @@ public class Main {
     System.out.println(" to: " + to);
     System.out.println(" width: " + width);
     System.out.println(" height: " + height);
-    Path path = FileSystems.getDefault().getPath(System.getProperty("user.home") + "/" + from);
+    Path path = FileSystems.getDefault().getPath(from);
     DirectoryResolutionAnalyzer directoryResolutionAnalyzer = new DirectoryResolutionAnalyzer(path,
         new JpgAndDirectoryFilter(), width, height,
         false);
     directoryResolutionAnalyzer.printSummary();
     if ("TRUE".equalsIgnoreCase(copy)) {
-      directoryResolutionAnalyzer.copyFiles(System.getProperty("user.home") + "/" + to);
+      directoryResolutionAnalyzer.copyFiles(to);
     }
   }
 
   private static Options createOptions() {
     Options options = new Options();
 
-    Option from = new Option("f", "from", true, "Path origin where are locate the pictures");
+    Option from = new Option("f", "from", true, "Absolute path origin where are locate the pictures");
     from.setRequired(true);
     options.addOption(from);
 
-    Option to = new Option("to", "to", true, "Relative path (home user) which you want to copy the pictures");
+    Option to = new Option("to", "to", true, "Absolute path which you want to copy the pictures");
     to.setRequired(true);
     options.addOption(to);
 
