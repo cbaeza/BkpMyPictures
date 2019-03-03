@@ -15,10 +15,12 @@ import org.apache.commons.cli.ParseException;
 import com.cbaeza.analyzer.DirectoryResolutionAnalyzer;
 import com.cbaeza.analyzer.DirectorySizeAnalyzer;
 import com.cbaeza.filters.JpgAndDirectoryFilter;
+import com.github.lalyos.jfiglet.FigletFont;
 
 public class Main {
 
   public static void main(String[] args) throws IOException {
+    displayBanner();
     Options options = createOptions();
     CommandLineParser parser = new DefaultParser();
     HelpFormatter formatter = new HelpFormatter();
@@ -61,6 +63,11 @@ public class Main {
       formatter.printHelp("BkpMyPictures", options);
       System.exit(1);
     }
+  }
+
+  private static void displayBanner() {
+    String asciiArt = FigletFont.convertOneLine("BkpMyPictures");
+    System.out.println(asciiArt);
   }
 
   private static void handleJpegWithSize(String from, String to, long size, String copy) {

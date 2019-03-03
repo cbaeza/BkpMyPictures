@@ -7,6 +7,13 @@ Utility tool to find out and extract pictures into directories and copy this pic
     
 # Usage
 
+         ____   _            __  __         ____   _        _
+        | __ ) | | __ _ __  |  \/  | _   _ |  _ \ (_)  ___ | |_  _   _  _ __   ___  ___
+        |  _ \ | |/ /| '_ \ | |\/| || | | || |_) || | / __|| __|| | | || '__| / _ \/ __|
+        | |_) ||   < | |_) || |  | || |_| ||  __/ | || (__ | |_ | |_| || |   |  __/\__ \
+        |____/ |_|\_\| .__/ |_|  |_| \__, ||_|    |_| \___| \__| \__,_||_|    \___||___/
+                     |_|             |___/
+                     
        usage: BkpMyPictures
        
         -c,--copy <arg>           Confirm copy files. Set TRUE

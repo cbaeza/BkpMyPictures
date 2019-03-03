@@ -18,6 +18,7 @@ import com.drew.imaging.ImageProcessingException;
 import com.drew.metadata.Directory;
 import com.drew.metadata.Metadata;
 import com.drew.metadata.Tag;
+import com.github.lalyos.jfiglet.FigletFont;
 
 public abstract class AbstractDirectoryAnalizer {
   private static final Logger LOG = LoggerFactory.getLogger(AbstractDirectoryAnalizer.class);
@@ -57,8 +58,10 @@ public abstract class AbstractDirectoryAnalizer {
 
   public void copyFiles(String to) {
     // copy all relevant files
-    LOG.info("************************");
+    String asciiArt = FigletFont.convertOneLine("Copy files");
+    System.out.println(asciiArt);
     LOG.info("COPYING FILES TO: " + to);
+
     int i = 0;
     for (Path source : files) {
       System.out.println(source.toString());
@@ -79,6 +82,8 @@ public abstract class AbstractDirectoryAnalizer {
   }
 
   public void printSummary() {
+    String asciiArt = FigletFont.convertOneLine("Print Summary");
+    System.out.println(asciiArt);
     LOG.info("************************");
     for (Path path : files) {
       LOG.info(path.toString());

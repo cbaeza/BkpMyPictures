@@ -43,6 +43,7 @@ public class DirectorySizeAnalyzer extends AbstractDirectoryAnalizer {
   @SuppressWarnings("unchecked")
   private void analyze(
       final Path path) {
+    LOG.info("Visiting: " + path.toString());
     try (DirectoryStream<Path> stream = Files.newDirectoryStream(path, filter)) {
       for (Path entry : stream) {
         if (Files.isDirectory(entry)) {
@@ -50,6 +51,7 @@ public class DirectorySizeAnalyzer extends AbstractDirectoryAnalizer {
         }
         File file = entry.toFile();
         if (isFileRelevant(file)) {
+          LOG.info("File relevant: " + path.toString());
           files.add(entry);
           totalFileSize += file.length();
           if (printMetadata) {
